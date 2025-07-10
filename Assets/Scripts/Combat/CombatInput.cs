@@ -1,21 +1,30 @@
 using UnityEngine;
+#if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
+#endif
 
 namespace MMO.Combat
 {
+#if ENABLE_INPUT_SYSTEM
     [RequireComponent(typeof(PlayerInput))]
+#endif
     public class CombatInput : MonoBehaviour
     {
+#if ENABLE_INPUT_SYSTEM
         public PlayerInput PlayerInput { get; private set; }
+#endif
 
         public event System.Action<int> OnAbilityPressed;
         public event System.Action OnTargetNext;
 
+#if ENABLE_INPUT_SYSTEM
         private void Awake()
         {
             PlayerInput = GetComponent<PlayerInput>();
         }
+#endif
 
+#if ENABLE_INPUT_SYSTEM
         public void OnAbility1(InputAction.CallbackContext context)
         {
             if (context.performed)
@@ -51,5 +60,23 @@ namespace MMO.Combat
             if (context.performed)
                 OnTargetNext?.Invoke();
         }
+#else
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+                OnAbilityPressed?.Invoke(1);
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+                OnAbilityPressed?.Invoke(2);
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+                OnAbilityPressed?.Invoke(3);
+            if (Input.GetKeyDown(KeyCode.Alpha4))
+                OnAbilityPressed?.Invoke(4);
+            if (Input.GetKeyDown(KeyCode.Alpha5))
+                OnAbilityPressed?.Invoke(5);
+
+            if (Input.GetKeyDown(KeyCode.Tab))
+                OnTargetNext?.Invoke();
+        }
+#endif
     }
 }
