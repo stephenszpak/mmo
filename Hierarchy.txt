@@ -1,0 +1,663 @@
+MainCamera
+  Transform
+  Camera
+  AudioListener
+  CinemachineBrain
+    m_ShowDebugText: False
+    m_ShowCameraFrustum: True
+    m_IgnoreTimeScale: False
+    m_WorldUpOverride: null
+    m_UpdateMethod: SmartUpdate
+    m_BlendUpdateMethod: LateUpdate
+    m_DefaultBlend: Cinemachine.CinemachineBlendDefinition
+    m_CustomBlends: 
+    m_CameraCutEvent: Cinemachine.CinemachineBrain+BrainEvent Cinemachine.CinemachineBrain+BrainEvent
+    m_CameraActivatedEvent: Cinemachine.CinemachineBrain+VcamActivatedEvent Cinemachine.CinemachineBrain+VcamActivatedEvent
+  UniversalAdditionalCameraData
+Directional Light
+  Transform
+  Light
+  UniversalAdditionalLightData
+Plane
+  Transform
+  MeshFilter
+  MeshRenderer
+  MeshCollider
+Environment_Prefab
+  Transform
+  Environment_LightProbeAnchor
+    Transform
+  Greybox
+    Transform
+    Primitives
+      Transform
+      Ground
+        Transform
+        MeshFilter
+        MeshRenderer
+        MeshCollider
+      border
+        Transform
+        MeshFilter
+        MeshRenderer
+        BoxCollider
+      border
+        Transform
+        MeshFilter
+        MeshRenderer
+        BoxCollider
+      border
+        Transform
+        MeshFilter
+        MeshRenderer
+        BoxCollider
+      border
+        Transform
+        MeshFilter
+        MeshRenderer
+        BoxCollider
+      Cylinder
+        Transform
+        MeshFilter
+        MeshRenderer
+        CapsuleCollider
+      Ground_Mesh
+        Transform
+        MeshFilter
+        MeshRenderer
+    Structure_Prefab
+      Transform
+      MeshFilter
+      MeshRenderer
+      MeshCollider
+      Grebox
+        Transform
+        Cube (111)
+          Transform
+          MeshFilter
+          MeshRenderer
+          BoxCollider
+        Cube (126)
+          Transform
+          MeshFilter
+          MeshRenderer
+          BoxCollider
+        Cube (129)
+          Transform
+          MeshFilter
+          MeshRenderer
+          BoxCollider
+        Cube (103)
+          Transform
+          MeshFilter
+          MeshRenderer
+          BoxCollider
+        Cube (104)
+          Transform
+          MeshFilter
+          MeshRenderer
+          BoxCollider
+        Cube (122)
+          Transform
+          MeshFilter
+          MeshRenderer
+          BoxCollider
+        Cube (121)
+          Transform
+          MeshFilter
+          MeshRenderer
+          BoxCollider
+        Cube (110)
+          Transform
+          MeshFilter
+          MeshRenderer
+          BoxCollider
+        Cube (117)
+          Transform
+          MeshFilter
+          MeshRenderer
+          BoxCollider
+        Cube (108)
+          Transform
+          MeshFilter
+          MeshRenderer
+          BoxCollider
+        Cube (101)
+          Transform
+          MeshFilter
+          MeshRenderer
+          BoxCollider
+        Cube (118)
+          Transform
+          MeshFilter
+          MeshRenderer
+          BoxCollider
+        Cube (119)
+          Transform
+          MeshFilter
+          MeshRenderer
+          BoxCollider
+        Cube (105)
+          Transform
+          MeshFilter
+          MeshRenderer
+          BoxCollider
+        Cube (127)
+          Transform
+          MeshFilter
+          MeshRenderer
+          BoxCollider
+        Cube (81)
+          Transform
+          MeshFilter
+          MeshRenderer
+          BoxCollider
+        Cube (120)
+          Transform
+          MeshFilter
+          MeshRenderer
+          BoxCollider
+        Cube (96)
+          Transform
+          MeshFilter
+          MeshRenderer
+          BoxCollider
+        Cube (79)
+          Transform
+          MeshFilter
+          MeshRenderer
+          BoxCollider
+        Cube (113)
+          Transform
+          MeshFilter
+          MeshRenderer
+          BoxCollider
+        Cube (87)
+          Transform
+          MeshFilter
+          MeshRenderer
+          BoxCollider
+    Wall_Prefab
+      Transform
+      MeshFilter
+      MeshRenderer
+      BoxCollider
+      BoxCollider
+    Stairs_650_400_300_Prefab
+      Transform
+      MeshFilter
+      MeshRenderer
+      MeshCollider
+    Box_100x100x100_Prefab
+      Transform
+      MeshFilter
+      MeshRenderer
+      BoxCollider
+    Box_100x100x100_Prefab (1)
+      Transform
+      MeshFilter
+      MeshRenderer
+      BoxCollider
+    Box_100x100x100_Prefab (2)
+      Transform
+      MeshFilter
+      MeshRenderer
+      BoxCollider
+    Box_100x100x100_Prefab (3)
+      Transform
+      MeshFilter
+      MeshRenderer
+      BoxCollider
+    Box_100x100x100_Prefab (4)
+      Transform
+      MeshFilter
+      MeshRenderer
+      BoxCollider
+    Box_100x100x100_Prefab (5)
+      Transform
+      MeshFilter
+      MeshRenderer
+      BoxCollider
+    Box_100x100x100_Prefab (6)
+      Transform
+      MeshFilter
+      MeshRenderer
+      BoxCollider
+    Box_100x100x100_Prefab (7)
+      Transform
+      MeshFilter
+      MeshRenderer
+      BoxCollider
+    Box_100x100x100_Prefab (8)
+      Transform
+      MeshFilter
+      MeshRenderer
+      BoxCollider
+    Box_100x100x100_Prefab (9)
+      Transform
+      MeshFilter
+      MeshRenderer
+      BoxCollider
+    Box_100x100x100_Prefab (10)
+      Transform
+      MeshFilter
+      MeshRenderer
+      BoxCollider
+    Box_100x100x100_Prefab (11)
+      Transform
+      MeshFilter
+      MeshRenderer
+      BoxCollider
+    Box_100x100x100_Prefab (12)
+      Transform
+      MeshFilter
+      MeshRenderer
+      BoxCollider
+    Box_100x100x100_Prefab (13)
+      Transform
+      MeshFilter
+      MeshRenderer
+      BoxCollider
+    Box_100x100x100_Prefab (14)
+      Transform
+      MeshFilter
+      MeshRenderer
+      BoxCollider
+    Box_100x100x100_Prefab (15)
+      Transform
+      MeshFilter
+      MeshRenderer
+      BoxCollider
+    Box_100x100x100_Prefab (16)
+      Transform
+      MeshFilter
+      MeshRenderer
+      BoxCollider
+    Box_100x100x100_Prefab (17)
+      Transform
+      MeshFilter
+      MeshRenderer
+      BoxCollider
+    Ramp_Mesh
+      Transform
+      MeshFilter
+      MeshRenderer
+      MeshCollider
+    Tunnel_Prefab
+      Transform
+      MeshFilter
+      MeshRenderer
+      BoxCollider
+      BoxCollider
+      BoxCollider
+    Box_350x200x250_Prefab
+      Transform
+      MeshFilter
+      MeshRenderer
+      BoxCollider
+    Box_350x200x250_Prefab
+      Transform
+      MeshFilter
+      MeshRenderer
+      BoxCollider
+    Box_350x300x250_Prefab
+      Transform
+      MeshFilter
+      MeshRenderer
+      BoxCollider
+    Stairs_200x100x200_Prefab
+      Transform
+      MeshFilter
+      MeshRenderer
+      MeshCollider
+    Stairs_200x100x200_Prefab(1)
+      Transform
+      MeshFilter
+      MeshRenderer
+      MeshCollider
+PlayerArmature
+  Transform
+  Animator
+  CharacterController
+  ThirdPersonController
+    MoveSpeed: 2
+    SprintSpeed: 5.335
+    RotationSmoothTime: 0.12
+    SpeedChangeRate: 10
+    LandingAudioClip: Player_Land (UnityEngine.AudioClip)
+    FootstepAudioClips: UnityEngine.AudioClip[]
+    FootstepAudioVolume: 0.3
+    JumpHeight: 1.2
+    Gravity: -15
+    JumpTimeout: 0.3
+    FallTimeout: 0.15
+    Grounded: True
+    GroundedOffset: -0.14
+    GroundedRadius: 0.28
+    GroundLayers: UnityEngine.LayerMask
+    CinemachineCameraTarget: PlayerCameraRoot (UnityEngine.GameObject)
+    TopClamp: 70
+    BottomClamp: -30
+    CameraAngleOverride: 0
+    LockCameraPosition: False
+  BasicRigidBodyPush
+    pushLayers: UnityEngine.LayerMask
+    canPush: False
+    strength: 1.1
+  StarterAssetsInputs
+    move: (0.00, 0.00)
+    look: (0.00, 0.00)
+    jump: False
+    sprint: False
+    analogMovement: False
+    cursorLocked: True
+    cursorInputForLook: True
+  PlayerInput
+  PlayerCameraRoot
+    Transform
+  Geometry
+    Transform
+    Armature_Mesh
+      Transform
+      SkinnedMeshRenderer
+  Skeleton
+    Transform
+    Hips
+      Transform
+      Left_UpperLeg
+        Transform
+        Left_LowerLeg
+          Transform
+          Left_Foot
+            Transform
+            Left_Toes
+              Transform
+              Left_ToesEnd
+                Transform
+      Right_UpperLeg
+        Transform
+        Right_LowerLeg
+          Transform
+          Right_Foot
+            Transform
+            Right_Toes
+              Transform
+              Right_ToesEnd
+                Transform
+      Spine
+        Transform
+        Chest
+          Transform
+          UpperChest
+            Transform
+            Left_Shoulder
+              Transform
+              Left_UpperArm
+                Transform
+                Left_LowerArm
+                  Transform
+                  Left_Hand
+                    Transform
+                    Left_IndexProximal
+                      Transform
+                      Left_IndexIntermediate
+                        Transform
+                        Left_IndexDistal
+                          Transform
+                          Left_IndexDistalEnd
+                            Transform
+                    Left_MiddleProximal
+                      Transform
+                      Left_MiddleIntermediate
+                        Transform
+                        Left_MiddleDistal
+                          Transform
+                          Left_MiddleDistalEnd
+                            Transform
+                    Left_PinkyProximal
+                      Transform
+                      Left_PinkyIntermediate
+                        Transform
+                        Left_PinkyDistal
+                          Transform
+                          Left_PinkyDistalEnd
+                            Transform
+                    Left_RingProximal
+                      Transform
+                      Left_RingIntermediate
+                        Transform
+                        Left_RingDistal
+                          Transform
+                          Left_RingDistalEnd
+                            Transform
+                    Left_ThumbProximal
+                      Transform
+                      Left_ThumbIntermediate
+                        Transform
+                        Left_ThumbDistal
+                          Transform
+                          Left_ThumbDistalEnd
+                            Transform
+            Neck
+              Transform
+              Head
+                Transform
+                Jaw
+                  Transform
+                Left_Eye
+                  Transform
+                Right_Eye
+                  Transform
+              Neck_Twist_A
+                Transform
+            Right_Shoulder
+              Transform
+              Right_UpperArm
+                Transform
+                Right_LowerArm
+                  Transform
+                  Right_Hand
+                    Transform
+                    Right_IndexProximal
+                      Transform
+                      Right_IndexIntermediate
+                        Transform
+                        Right_IndexDistal
+                          Transform
+                          Right_IndexDistalEnd
+                            Transform
+                    Right_MiddleProximal
+                      Transform
+                      Right_MiddleIntermediate
+                        Transform
+                        Right_MiddleDistal
+                          Transform
+                          Right_MiddleDistalEnd
+                            Transform
+                    Right_PinkyProximal
+                      Transform
+                      Right_PinkyIntermediate
+                        Transform
+                        Right_PinkyDistal
+                          Transform
+                          Right_PinkyDistalEnd
+                            Transform
+                    Right_RingProximal
+                      Transform
+                      Right_RingIntermediate
+                        Transform
+                        Right_RingDistal
+                          Transform
+                          Right_RingDistalEnd
+                            Transform
+                    Right_ThumbProximal
+                      Transform
+                      Right_ThumbIntermediate
+                        Transform
+                        Right_ThumbDistal
+                          Transform
+                          Right_ThumbDistalEnd
+                            Transform
+MMOFreeLookCamera
+  Transform
+  CinemachineFreeLook
+    m_LookAt: Head (UnityEngine.Transform)
+    m_Follow: PlayerArmature (UnityEngine.Transform)
+    m_CommonLens: True
+    m_Lens: Cinemachine.LensSettings
+    m_Transitions: Cinemachine.CinemachineVirtualCameraBase+TransitionParams
+    m_YAxis: Cinemachine.AxisState
+    m_YAxisRecentering: Cinemachine.AxisState+Recentering
+    m_XAxis: Cinemachine.AxisState
+    m_Heading: Cinemachine.CinemachineOrbitalTransposer+Heading
+    m_RecenterToTargetHeading: Cinemachine.AxisState+Recentering
+    m_BindingMode: WorldSpace
+    m_SplineCurvature: 0.2
+    m_Orbits: Cinemachine.CinemachineFreeLook+Orbit[]
+    m_ExcludedPropertiesInInspector: System.String[]
+    m_LockStageInInspector: Cinemachine.CinemachineCore+Stage[]
+    m_Priority: 10
+    FollowTargetAttachment: 0
+    LookAtTargetAttachment: 0
+    m_StandbyUpdate: RoundRobin
+  TopRig
+    Transform
+    CinemachineVirtualCamera
+      m_LookAt: null
+      m_Follow: 
+      m_Lens: Cinemachine.LensSettings
+      m_Transitions: Cinemachine.CinemachineVirtualCameraBase+TransitionParams
+      m_ExcludedPropertiesInInspector: System.String[]
+      m_LockStageInInspector: Cinemachine.CinemachineCore+Stage[]
+      m_Priority: 10
+      FollowTargetAttachment: 0
+      LookAtTargetAttachment: 0
+      m_StandbyUpdate: RoundRobin
+    cm
+      Transform
+      CinemachinePipeline
+      CinemachineOrbitalTransposer
+        m_Heading: Cinemachine.CinemachineOrbitalTransposer+Heading
+        m_RecenterToTargetHeading: Cinemachine.AxisState+Recentering
+        m_XAxis: Cinemachine.AxisState
+        m_HeadingIsSlave: True
+        m_BindingMode: WorldSpace
+        m_FollowOffset: (0.00, 2.50, -3.00)
+        m_XDamping: 1
+        m_YDamping: 1
+        m_ZDamping: 1
+        m_AngularDampingMode: Euler
+        m_PitchDamping: 0
+        m_YawDamping: 0
+        m_RollDamping: 0
+        m_AngularDamping: 0
+      CinemachineComposer
+        m_TrackedObjectOffset: (0.00, 0.00, 0.00)
+        m_LookaheadTime: 0
+        m_LookaheadSmoothing: 0
+        m_LookaheadIgnoreY: False
+        m_HorizontalDamping: 0
+        m_VerticalDamping: 0
+        m_ScreenX: 0.5
+        m_ScreenY: 0.5
+        m_DeadZoneWidth: 0
+        m_DeadZoneHeight: 0
+        m_SoftZoneWidth: 0.8
+        m_SoftZoneHeight: 0.8
+        m_BiasX: 0
+        m_BiasY: 0
+        m_CenterOnActivate: True
+  MiddleRig
+    Transform
+    CinemachineVirtualCamera
+      m_LookAt: null
+      m_Follow: 
+      m_Lens: Cinemachine.LensSettings
+      m_Transitions: Cinemachine.CinemachineVirtualCameraBase+TransitionParams
+      m_ExcludedPropertiesInInspector: System.String[]
+      m_LockStageInInspector: Cinemachine.CinemachineCore+Stage[]
+      m_Priority: 10
+      FollowTargetAttachment: 0
+      LookAtTargetAttachment: 0
+      m_StandbyUpdate: RoundRobin
+    cm
+      Transform
+      CinemachinePipeline
+      CinemachineOrbitalTransposer
+        m_Heading: Cinemachine.CinemachineOrbitalTransposer+Heading
+        m_RecenterToTargetHeading: Cinemachine.AxisState+Recentering
+        m_XAxis: Cinemachine.AxisState
+        m_HeadingIsSlave: True
+        m_BindingMode: WorldSpace
+        m_FollowOffset: (0.00, 2.50, -3.00)
+        m_XDamping: 1
+        m_YDamping: 1
+        m_ZDamping: 1
+        m_AngularDampingMode: Euler
+        m_PitchDamping: 0
+        m_YawDamping: 0
+        m_RollDamping: 0
+        m_AngularDamping: 0
+      CinemachineComposer
+        m_TrackedObjectOffset: (0.00, 0.00, 0.00)
+        m_LookaheadTime: 0
+        m_LookaheadSmoothing: 0
+        m_LookaheadIgnoreY: False
+        m_HorizontalDamping: 0
+        m_VerticalDamping: 0
+        m_ScreenX: 0.5
+        m_ScreenY: 0.55
+        m_DeadZoneWidth: 0
+        m_DeadZoneHeight: 0
+        m_SoftZoneWidth: 0.8
+        m_SoftZoneHeight: 0.8
+        m_BiasX: 0
+        m_BiasY: 0
+        m_CenterOnActivate: True
+  BottomRig
+    Transform
+    CinemachineVirtualCamera
+      m_LookAt: null
+      m_Follow: 
+      m_Lens: Cinemachine.LensSettings
+      m_Transitions: Cinemachine.CinemachineVirtualCameraBase+TransitionParams
+      m_ExcludedPropertiesInInspector: System.String[]
+      m_LockStageInInspector: Cinemachine.CinemachineCore+Stage[]
+      m_Priority: 10
+      FollowTargetAttachment: 0
+      LookAtTargetAttachment: 0
+      m_StandbyUpdate: RoundRobin
+    cm
+      Transform
+      CinemachinePipeline
+      CinemachineOrbitalTransposer
+        m_Heading: Cinemachine.CinemachineOrbitalTransposer+Heading
+        m_RecenterToTargetHeading: Cinemachine.AxisState+Recentering
+        m_XAxis: Cinemachine.AxisState
+        m_HeadingIsSlave: True
+        m_BindingMode: WorldSpace
+        m_FollowOffset: (0.00, 2.50, -3.00)
+        m_XDamping: 1
+        m_YDamping: 1
+        m_ZDamping: 1
+        m_AngularDampingMode: Euler
+        m_PitchDamping: 0
+        m_YawDamping: 0
+        m_RollDamping: 0
+        m_AngularDamping: 0
+      CinemachineComposer
+        m_TrackedObjectOffset: (0.00, 0.00, 0.00)
+        m_LookaheadTime: 0
+        m_LookaheadSmoothing: 0
+        m_LookaheadIgnoreY: False
+        m_HorizontalDamping: 0
+        m_VerticalDamping: 0
+        m_ScreenX: 0.5
+        m_ScreenY: 0.6
+        m_DeadZoneWidth: 0
+        m_DeadZoneHeight: 0
+        m_SoftZoneWidth: 0.8
+        m_SoftZoneHeight: 0.8
+        m_BiasX: 0
+        m_BiasY: 0
+        m_CenterOnActivate: True
