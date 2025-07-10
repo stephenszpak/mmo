@@ -72,7 +72,7 @@ namespace MMO.Camera
         private void LateUpdate()
         {
 #if ENABLE_INPUT_SYSTEM
-            bool orbiting = orbitAction != null && orbitAction.action.ReadValue<float>() > 0.5f;
+            bool orbiting = orbitAction != null && orbitAction.action.IsPressed();
             if (orbiting)
             {
                 Vector2 look = lookAction != null ? lookAction.action.ReadValue<Vector2>() : Vector2.zero;
@@ -80,10 +80,13 @@ namespace MMO.Camera
                 pitch -= look.y * rotationSpeed * Time.deltaTime;
                 pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
             }
+            else if (followTarget != null)
+            {
+                yaw = followTarget.eulerAngles.y;
+            }
 
             float scroll = zoomAction != null ? zoomAction.action.ReadValue<Vector2>().y : 0f;
-            scroll *= zoomSpeed * Time.deltaTime;
-            distance = Mathf.Clamp(distance - scroll, minDistance, maxDistance);
+            distance = Mathf.Clamp(distance - scroll * zoomSpeed, minDistance, maxDistance);
 #endif
             if (transposer != null && followTarget != null)
                 UpdateCamera();
