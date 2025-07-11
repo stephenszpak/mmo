@@ -6,48 +6,55 @@ using UnityEngine.InputSystem;
 
 namespace MMO.Camera
 {
-    [RequireComponent(typeof(CinemachineVirtualCamera))]
+    [RequireComponent(typeof(CinemachineFreeLook))]
     public class MMOCameraController : MonoBehaviour
     {
+        [SerializeField] private CinemachineFreeLook vcam;
         [SerializeField] private Transform followTarget;
-        [SerializeField] private float verticalOffset = 1.5f;
-        [SerializeField] private float rotationSpeed = 90f;
-        [SerializeField] private float minPitch = -30f;
-        [SerializeField] private float maxPitch = 70f;
-        [SerializeField] private float zoomSpeed = 2f;
-        [SerializeField] private float minDistance = 2f;
-        [SerializeField] private float maxDistance = 8f;
 
-        private CinemachineVirtualCamera vcam;
-        private CinemachineOrbitalTransposer transposer;
-
-        private float yaw;
-        private float pitch = 20f;
-        private float distance;
-
+        [Header("Input Actions")]
 #if ENABLE_INPUT_SYSTEM
         [SerializeField] private InputActionReference lookAction;
         [SerializeField] private InputActionReference orbitAction;
         [SerializeField] private InputActionReference zoomAction;
 #endif
 
+        [Header("Settings")]
+        [SerializeField] private float rotationSpeed = 120f;
+        [SerializeField] private float zoomSpeed = 2f;
+        [SerializeField] private float minZoom = 2f;
+        [SerializeField] private float maxZoom = 8f;
+
+        private float zoomDistance;
+        private CinemachineFreeLook.Orbit[] originalOrbits;
+        private float[] radiusRatios;
+
+#if ENABLE_INPUT_SYSTEM
+        private bool IsOrbiting => orbitAction != null && orbitAction.action.IsPressed();
+#endif
+
         private void Awake()
         {
-            vcam = GetComponent<CinemachineVirtualCamera>();
-            if (followTarget == null)
-                followTarget = vcam.Follow;
-            else
-                vcam.Follow = followTarget;
+            if (vcam == null)
+                vcam = GetComponent<CinemachineFreeLook>();
 
-            transposer = vcam.GetCinemachineComponent<CinemachineOrbitalTransposer>();
-            if (transposer != null)
+            vcam.m_BindingMode = CinemachineTransposer.BindingMode.WorldSpace;
+
+            if (followTarget != null)
+                vcam.Follow = followTarget;
+            else
+                followTarget = vcam.Follow;
+
+            originalOrbits = new CinemachineFreeLook.Orbit[vcam.m_Orbits.Length];
+            radiusRatios = new float[vcam.m_Orbits.Length];
+            for (int i = 0; i < vcam.m_Orbits.Length; i++)
             {
-                transposer.m_BindingMode = CinemachineTransposer.BindingMode.WorldSpace;
-                Vector3 offset = transposer.m_FollowOffset;
-                offset.y -= verticalOffset;
-                distance = offset.magnitude;
-                yaw = Mathf.Atan2(offset.x, -offset.z) * Mathf.Rad2Deg;
-                pitch = Mathf.Asin(Mathf.Clamp(offset.y / Mathf.Max(distance, 0.001f), -1f, 1f)) * Mathf.Rad2Deg;
+                originalOrbits[i] = vcam.m_Orbits[i];
+            }
+            zoomDistance = vcam.m_Orbits[1].m_Radius;
+            for (int i = 0; i < vcam.m_Orbits.Length; i++)
+            {
+                radiusRatios[i] = vcam.m_Orbits[i].m_Radius / zoomDistance;
             }
         }
 
@@ -71,32 +78,40 @@ namespace MMO.Camera
 
         private void LateUpdate()
         {
+            if (vcam == null || followTarget == null)
+                return;
+
 #if ENABLE_INPUT_SYSTEM
-            bool orbiting = orbitAction != null && orbitAction.action.IsPressed();
-            if (orbiting)
+            if (IsOrbiting)
             {
-                Vector2 look = lookAction != null ? lookAction.action.ReadValue<Vector2>() : Vector2.zero;
-                yaw += look.x * rotationSpeed * Time.deltaTime;
-                pitch -= look.y * rotationSpeed * Time.deltaTime;
-                pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
+                Vector2 delta = lookAction != null ? lookAction.action.ReadValue<Vector2>() : Vector2.zero;
+                vcam.m_XAxis.Value += delta.x * rotationSpeed * Time.deltaTime;
+                vcam.m_YAxis.Value -= delta.y * rotationSpeed * Time.deltaTime;
+                vcam.m_YAxis.Value = Mathf.Clamp01(vcam.m_YAxis.Value);
             }
-            else if (followTarget != null)
+            else
             {
-                yaw = followTarget.eulerAngles.y;
+                vcam.m_XAxis.Value = followTarget.eulerAngles.y;
             }
 
             float scroll = zoomAction != null ? zoomAction.action.ReadValue<Vector2>().y : 0f;
-            distance = Mathf.Clamp(distance - scroll * zoomSpeed, minDistance, maxDistance);
+            if (Mathf.Abs(scroll) > 0.001f)
+            {
+                zoomDistance = Mathf.Clamp(zoomDistance - scroll * zoomSpeed, minZoom, maxZoom);
+                ApplyZoom();
+            }
 #endif
-            if (transposer != null && followTarget != null)
-                UpdateCamera();
         }
 
-        private void UpdateCamera()
+        private void ApplyZoom()
         {
-            Vector3 offset = Quaternion.Euler(pitch, yaw, 0) * new Vector3(0f, 0f, -distance);
-            offset.y += verticalOffset;
-            transposer.m_FollowOffset = offset;
+            for (int i = 0; i < vcam.m_Orbits.Length; i++)
+            {
+                var orbit = vcam.m_Orbits[i];
+                orbit.m_Radius = zoomDistance * radiusRatios[i];
+                orbit.m_Height = originalOrbits[i].m_Height;
+                vcam.m_Orbits[i] = orbit;
+            }
         }
     }
 }
