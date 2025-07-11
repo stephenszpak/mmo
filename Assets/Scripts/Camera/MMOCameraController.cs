@@ -24,6 +24,7 @@ namespace MMO.Camera
         [SerializeField] private float zoomSpeed = 2f;
         [SerializeField] private float minZoom = 2f;
         [SerializeField] private float maxZoom = 8f;
+        [SerializeField] private float mouseSensitivity = 200f;
 
         private float zoomDistance;
         private CinemachineFreeLook.Orbit[] originalOrbits;
@@ -39,6 +40,11 @@ namespace MMO.Camera
                 vcam = GetComponentInChildren<CinemachineFreeLook>();
             if (followTarget == null && vcam != null)
                 followTarget = vcam.Follow;
+            if (vcam != null)
+            {
+                vcam.m_XAxis.m_MaxSpeed = mouseSensitivity;
+                vcam.m_YAxis.m_MaxSpeed = mouseSensitivity;
+            }
         }
 
         private void Awake()
@@ -48,16 +54,13 @@ namespace MMO.Camera
 
             if (vcam == null)
             {
-                Debug.LogError($"{nameof(MMOCameraController)} requires a CinemachineFreeLook assigned in the Inspector or as a child.", this);
+                Debug.LogWarning($"{nameof(MMOCameraController)} could not find a {nameof(CinemachineFreeLook)} in its children.", this);
                 enabled = false;
                 return;
             }
 
-            var cams = GetComponentsInChildren<CinemachineVirtualCameraBase>();
-            if (cams.Length > 1)
-            {
-                Debug.LogWarning($"{nameof(MMOCameraController)} found multiple CinemachineVirtualCameraBase components. Remove extras to avoid conflicts.", this);
-            }
+            vcam.m_XAxis.m_MaxSpeed = mouseSensitivity;
+            vcam.m_YAxis.m_MaxSpeed = mouseSensitivity;
 
             vcam.m_BindingMode = CinemachineTransposer.BindingMode.WorldSpace;
 
