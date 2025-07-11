@@ -8,7 +8,7 @@ namespace MMO.Networking
     [DisallowMultipleComponent]
     public class PlayerNetworkController : MonoBehaviour
     {
-        public int playerId = 1;
+        public string playerId = "1";
         public string serverIP = "127.0.0.1";
         public int serverPort = 4000;
 
@@ -34,17 +34,17 @@ namespace MMO.Networking
 
         private void SendMovement(Vector3 delta)
         {
-            byte[] packet = new byte[30];
+            byte[] idBytes = System.Text.Encoding.UTF8.GetBytes(playerId);
+            int packetSize = 4 + idBytes.Length + 2 + 24; // id length, id, opcode, 3 doubles
+            byte[] packet = new byte[packetSize];
             int offset = 0;
 
-            int pidNet = IPAddress.HostToNetworkOrder(playerId);
+            WriteInt(idBytes.Length, packet, ref offset);
+            Buffer.BlockCopy(idBytes, 0, packet, offset, idBytes.Length);
+            offset += idBytes.Length;
+
             short opcodeNet = IPAddress.HostToNetworkOrder((short)1);
-
-            byte[] tmp = BitConverter.GetBytes(pidNet);
-            Buffer.BlockCopy(tmp, 0, packet, offset, 4);
-            offset += 4;
-
-            tmp = BitConverter.GetBytes(opcodeNet);
+            byte[] tmp = BitConverter.GetBytes(opcodeNet);
             Buffer.BlockCopy(tmp, 0, packet, offset, 2);
             offset += 2;
 
@@ -53,6 +53,14 @@ namespace MMO.Networking
             WriteDouble(delta.z, packet, ref offset);
 
             udpClient.Send(packet, packet.Length, serverIP, serverPort);
+        }
+
+        private static void WriteInt(int value, byte[] buffer, ref int offset)
+        {
+            int net = IPAddress.HostToNetworkOrder(value);
+            byte[] bytes = BitConverter.GetBytes(net);
+            Buffer.BlockCopy(bytes, 0, buffer, offset, 4);
+            offset += 4;
         }
 
         private static void WriteDouble(double value, byte[] buffer, ref int offset)
