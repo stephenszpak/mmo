@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 namespace MMO.Camera
 {
-    [RequireComponent(typeof(CinemachineFreeLook))]
+    [DisallowMultipleComponent]
     public class MMOCameraController : MonoBehaviour
     {
         [SerializeField] private CinemachineFreeLook vcam;
@@ -33,10 +33,31 @@ namespace MMO.Camera
         private bool IsOrbiting => orbitAction != null && orbitAction.action.IsPressed();
 #endif
 
+        private void OnValidate()
+        {
+            if (vcam == null)
+                vcam = GetComponentInChildren<CinemachineFreeLook>();
+            if (followTarget == null && vcam != null)
+                followTarget = vcam.Follow;
+        }
+
         private void Awake()
         {
             if (vcam == null)
-                vcam = GetComponent<CinemachineFreeLook>();
+                vcam = GetComponentInChildren<CinemachineFreeLook>();
+
+            if (vcam == null)
+            {
+                Debug.LogError($"{nameof(MMOCameraController)} requires a CinemachineFreeLook assigned in the Inspector or as a child.", this);
+                enabled = false;
+                return;
+            }
+
+            var cams = GetComponentsInChildren<CinemachineVirtualCameraBase>();
+            if (cams.Length > 1)
+            {
+                Debug.LogError($"{nameof(MMOCameraController)} found multiple CinemachineVirtualCameraBase components. Remove extras to avoid conflicts.", this);
+            }
 
             vcam.m_BindingMode = CinemachineTransposer.BindingMode.WorldSpace;
 
