@@ -75,7 +75,7 @@ namespace MMO.UI
             GameObject bar = CreatePanel("ActionBar", parent, new Vector2(0.5f, 0f), new Vector2(0.5f, 0f));
             RectTransform rt = bar.GetComponent<RectTransform>();
             rt.pivot = new Vector2(0.5f, 0f);
-            rt.anchoredPosition = new Vector2(0f, 10f);
+            rt.anchoredPosition = new Vector2(0f, 20f);
             rt.sizeDelta = new Vector2(600f, 60f);
 
             HorizontalLayoutGroup layout = bar.AddComponent<HorizontalLayoutGroup>();
@@ -96,10 +96,11 @@ namespace MMO.UI
 
         private void CreateChatWindow(RectTransform parent)
         {
-            GameObject chat = CreatePanel("ChatWindow", parent, new Vector2(0f, 0f), new Vector2(0.3f, 0.3f));
+            GameObject chat = CreatePanel("ChatWindow", parent, new Vector2(0f, 0f), new Vector2(0f, 0f));
             RectTransform rt = chat.GetComponent<RectTransform>();
             rt.pivot = new Vector2(0f, 0f);
             rt.anchoredPosition = new Vector2(10f, 10f);
+            rt.sizeDelta = new Vector2(400f, 200f);
 
             if (chat.GetComponent<CanvasRenderer>() == null)
                 chat.AddComponent<CanvasRenderer>();
@@ -158,17 +159,14 @@ namespace MMO.UI
             GameObject container = new GameObject("UnitFrames");
             RectTransform containerRt = container.AddComponent<RectTransform>();
             containerRt.SetParent(parent, false);
-            containerRt.anchorMin = new Vector2(0.5f, 0f);
-            containerRt.anchorMax = new Vector2(0.5f, 0f);
+            containerRt.anchorMin = Vector2.zero;
+            containerRt.anchorMax = Vector2.one;
             containerRt.pivot = new Vector2(0.5f, 0f);
-            containerRt.anchoredPosition = new Vector2(0f, 80f);
-            containerRt.sizeDelta = new Vector2(600f, 60f);
+            containerRt.anchoredPosition = Vector2.zero;
+            containerRt.offsetMin = Vector2.zero;
+            containerRt.offsetMax = Vector2.zero;
 
-            HorizontalLayoutGroup layout = container.AddComponent<HorizontalLayoutGroup>();
-            layout.childAlignment = TextAnchor.MiddleCenter;
-            layout.spacing = 80f;
-            layout.childForceExpandWidth = false;
-            layout.childForceExpandHeight = false;
+            // Frames will be positioned explicitly, no layout group needed
 
             CreatePlayerFrame(containerRt);
             CreateTargetFrame(containerRt);
@@ -176,9 +174,10 @@ namespace MMO.UI
 
         private void CreatePlayerFrame(RectTransform parent)
         {
-            GameObject frame = CreatePanel("PlayerFrame", parent, new Vector2(0f, 0f), new Vector2(0f, 1f));
+            GameObject frame = CreatePanel("PlayerFrame", parent, new Vector2(0f, 0f), new Vector2(0f, 0f));
             RectTransform rt = frame.GetComponent<RectTransform>();
-            rt.pivot = new Vector2(1f, 0.5f);
+            rt.pivot = new Vector2(0f, 0.5f);
+            rt.anchoredPosition = new Vector2(220f, 150f);
             rt.sizeDelta = new Vector2(200f, 50f);
 
             VerticalLayoutGroup layout = frame.AddComponent<VerticalLayoutGroup>();
@@ -193,9 +192,10 @@ namespace MMO.UI
 
         private void CreateTargetFrame(RectTransform parent)
         {
-            GameObject frame = CreatePanel("TargetFrame", parent, new Vector2(1f, 0f), new Vector2(1f, 1f));
+            GameObject frame = CreatePanel("TargetFrame", parent, new Vector2(1f, 0f), new Vector2(1f, 0f));
             RectTransform rt = frame.GetComponent<RectTransform>();
-            rt.pivot = new Vector2(0f, 0.5f);
+            rt.pivot = new Vector2(1f, 0.5f);
+            rt.anchoredPosition = new Vector2(-220f, 150f);
             rt.sizeDelta = new Vector2(200f, 50f);
 
             VerticalLayoutGroup layout = frame.AddComponent<VerticalLayoutGroup>();
