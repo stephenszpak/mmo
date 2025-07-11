@@ -101,7 +101,8 @@ namespace MMO.UI
             rt.pivot = new Vector2(0f, 0f);
             rt.anchoredPosition = new Vector2(10f, 10f);
 
-            chat.AddComponent<CanvasRenderer>();
+            if (chat.GetComponent<CanvasRenderer>() == null)
+                chat.AddComponent<CanvasRenderer>();
             ScrollRect scroll = chat.AddComponent<ScrollRect>();
             GameObject viewport = new GameObject("Viewport", typeof(Image), typeof(Mask));
             RectTransform vpRt = viewport.GetComponent<RectTransform>();
@@ -212,7 +213,7 @@ namespace MMO.UI
             go.transform.SetParent(parent, false);
             Text text = go.GetComponent<Text>();
             text.text = name;
-            text.font = Resources.GetBuiltinResource<Font>("Arial.ttf");
+            text.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
             text.alignment = TextAnchor.MiddleCenter;
         }
 
