@@ -43,8 +43,6 @@ namespace MMO.Networking
             WriteFloat64(delta.y, packet, ref offset);
             WriteFloat64(delta.z, packet, ref offset);
 
-            Debug.Log($"Sending movement packet: {BitConverter.ToString(packet)}");
-
             udpClient.Send(packet, packet.Length, serverIP, serverPort);
         }
 
