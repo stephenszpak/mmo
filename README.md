@@ -28,6 +28,7 @@ Assets/
 3. **Camera**: Add a `CinemachineFreeLook` camera in the scene and set its `Follow` target to the player. Attach the `MMOCameraController` script and assign the `Look`, `Orbit`, and `Zoom` actions from your `PlayerControls` asset. Tweak the offsets and speeds in the Inspector.
 4. **Input System**: Install the `Input System` package from the Package Manager and enable it in Project Settings. Then create an `Input Actions` asset named `PlayerControls` in `Assets/Settings` with actions `Move`, `Look`, `Jump`, `TargetNext`, `Ability1`‑`Ability5`. Bind them for both keyboard/mouse and gamepad. Hook these callbacks to `CombatInput`.
 5. **Scripts**: Attach the provided scripts as needed.
+6. **UI Layout**: Add the `MMOUIBuilder` component to an empty GameObject in your scene to generate a placeholder MMORPG style interface.
 
 The client is intended to communicate with an Elixir/Phoenix backend using UDP and WebSockets.
 
