@@ -8,7 +8,7 @@ namespace MMO.Networking
     [DisallowMultipleComponent]
     public class PlayerNetworkController : MonoBehaviour
     {
-        public string playerId = "1";
+        public string playerId = "player1";
         public string serverIP = "127.0.0.1";
         public int serverPort = 4000;
 
