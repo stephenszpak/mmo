@@ -56,7 +56,7 @@ namespace MMO.Camera
             var cams = GetComponentsInChildren<CinemachineVirtualCameraBase>();
             if (cams.Length > 1)
             {
-                Debug.LogError($"{nameof(MMOCameraController)} found multiple CinemachineVirtualCameraBase components. Remove extras to avoid conflicts.", this);
+                Debug.LogWarning($"{nameof(MMOCameraController)} found multiple CinemachineVirtualCameraBase components. Remove extras to avoid conflicts.", this);
             }
 
             vcam.m_BindingMode = CinemachineTransposer.BindingMode.WorldSpace;
