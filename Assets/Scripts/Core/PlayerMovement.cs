@@ -15,6 +15,10 @@ namespace MMO.Core
         public float moveSpeed = 5f;
         public float rotationSpeed = 180f;
 
+        [Header("Physics Push")]
+        public LayerMask pushLayers;
+        [Range(0.5f, 5f)] public float pushStrength = 1.1f;
+
         private CharacterController controller;
         private Vector2 moveInput;
         private float turnInput;
@@ -39,22 +43,36 @@ namespace MMO.Core
             turnInput = (Input.GetKey(KeyCode.D) ? 1f : 0f) - (Input.GetKey(KeyCode.A) ? 1f : 0f);
             moveInput.x = (Input.GetKey(KeyCode.E) ? 1f : 0f) - (Input.GetKey(KeyCode.Q) ? 1f : 0f);
 #endif
-        }
 
-        private void FixedUpdate()
-        {
             Vector3 forward = transform.forward * moveInput.y;
             Vector3 strafe = transform.right * moveInput.x;
-            Vector3 movement = (forward + strafe) * moveSpeed;
+            Vector3 displacement = (forward + strafe) * moveSpeed * Time.deltaTime;
 
-            controller.Move(movement * Time.fixedDeltaTime);
+            controller.Move(displacement);
 
             if (Mathf.Abs(turnInput) > 0.001f)
             {
-                float yaw = transform.eulerAngles.y + turnInput * rotationSpeed * Time.fixedDeltaTime;
+                float yaw = transform.eulerAngles.y + turnInput * rotationSpeed * Time.deltaTime;
                 Quaternion targetRotation = Quaternion.Euler(0f, yaw, 0f);
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
             }
+        }
+
+        private void OnControllerColliderHit(ControllerColliderHit hit)
+        {
+            Rigidbody body = hit.collider.attachedRigidbody;
+            if (body == null || body.isKinematic)
+                return;
+
+            int bodyLayerMask = 1 << body.gameObject.layer;
+            if ((bodyLayerMask & pushLayers.value) == 0)
+                return;
+
+            if (hit.moveDirection.y < -0.3f)
+                return;
+
+            Vector3 pushDir = new Vector3(hit.moveDirection.x, 0f, hit.moveDirection.z);
+            body.AddForce(pushDir * pushStrength, ForceMode.Impulse);
         }
     }
 }
