@@ -25,8 +25,18 @@ namespace MMO.Camera
         [SerializeField] private float minZoom = 2f;
         [SerializeField] private float maxZoom = 10f;
         [SerializeField] private float mouseSensitivity = 150f;
+        [SerializeField] private float yawSmoothSpeed = 10f;
+        [SerializeField] private float pitchSmoothSpeed = 10f;
+        [SerializeField] private float minPitch = 0f;
+        [SerializeField] private float maxPitch = 1f;
+        [SerializeField] private float zoomSmoothSpeed = 10f;
 
         private float zoomDistance;
+        private float targetZoom;
+        private float yaw;
+        private float pitch;
+        private float targetYaw;
+        private float targetPitch;
         private CinemachineFreeLook.Orbit[] originalOrbits;
         private float[] radiusRatios;
 
@@ -76,6 +86,9 @@ namespace MMO.Camera
                 originalOrbits[i] = vcam.m_Orbits[i];
             }
             zoomDistance = vcam.m_Orbits[1].m_Radius;
+            targetZoom = zoomDistance;
+            yaw = targetYaw = vcam.m_XAxis.Value;
+            pitch = targetPitch = vcam.m_YAxis.Value;
             for (int i = 0; i < vcam.m_Orbits.Length; i++)
             {
                 radiusRatios[i] = vcam.m_Orbits[i].m_Radius / zoomDistance;
@@ -109,22 +122,29 @@ namespace MMO.Camera
             if (IsOrbiting)
             {
                 Vector2 delta = lookAction != null ? lookAction.action.ReadValue<Vector2>() : Vector2.zero;
-                vcam.m_XAxis.Value += delta.x * rotationSpeed * Time.deltaTime;
-                vcam.m_YAxis.Value -= delta.y * rotationSpeed * Time.deltaTime;
-                vcam.m_YAxis.Value = Mathf.Clamp01(vcam.m_YAxis.Value);
+                targetYaw += delta.x * rotationSpeed * Time.deltaTime;
+                targetPitch -= delta.y * rotationSpeed * Time.deltaTime;
+                targetPitch = Mathf.Clamp(targetPitch, minPitch, maxPitch);
             }
             else
             {
-                vcam.m_XAxis.Value = followTarget.eulerAngles.y;
+                targetYaw = followTarget.eulerAngles.y;
             }
 
             float scroll = zoomAction != null ? zoomAction.action.ReadValue<Vector2>().y : 0f;
             if (Mathf.Abs(scroll) > 0.001f)
             {
-                zoomDistance = Mathf.Clamp(zoomDistance - scroll * zoomSpeed, minZoom, maxZoom);
-                ApplyZoom();
+                targetZoom = Mathf.Clamp(targetZoom - scroll * zoomSpeed, minZoom, maxZoom);
             }
 #endif
+
+            yaw = Mathf.LerpAngle(yaw, targetYaw, yawSmoothSpeed * Time.deltaTime);
+            pitch = Mathf.Lerp(pitch, targetPitch, pitchSmoothSpeed * Time.deltaTime);
+            zoomDistance = Mathf.Lerp(zoomDistance, targetZoom, zoomSmoothSpeed * Time.deltaTime);
+
+            vcam.m_XAxis.Value = yaw;
+            vcam.m_YAxis.Value = Mathf.Clamp01(pitch);
+            ApplyZoom();
         }
 
         private void ApplyZoom()
