@@ -20,12 +20,21 @@ namespace MMO.Core
         [Range(0.5f, 5f)] public float pushStrength = 1.1f;
 
         private CharacterController controller;
+        private Animator animator;
+        private int animIDSpeed;
+        private int animIDMotionSpeed;
         private Vector2 moveInput;
         private float turnInput;
 
         private void Start()
         {
             controller = GetComponent<CharacterController>();
+            animator = GetComponent<Animator>();
+            if (animator != null)
+            {
+                animIDSpeed = Animator.StringToHash("Speed");
+                animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
+            }
         }
 
         private void Update()
@@ -49,6 +58,14 @@ namespace MMO.Core
             Vector3 displacement = (forward + strafe) * moveSpeed * Time.deltaTime;
 
             controller.Move(displacement);
+
+            if (animator != null)
+            {
+                float speed = displacement.magnitude / Time.deltaTime;
+                float inputMagnitude = moveInput.sqrMagnitude > 0 ? 1f : 0f;
+                animator.SetFloat(animIDSpeed, speed);
+                animator.SetFloat(animIDMotionSpeed, inputMagnitude);
+            }
 
             if (Mathf.Abs(turnInput) > 0.001f)
             {
