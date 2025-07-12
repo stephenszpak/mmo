@@ -20,11 +20,11 @@ namespace MMO.Camera
 #endif
 
         [Header("Settings")]
-        [SerializeField] private float rotationSpeed = 120f;
+        [SerializeField] private float rotationSpeed = 150f;
         [SerializeField] private float zoomSpeed = 2f;
         [SerializeField] private float minZoom = 2f;
-        [SerializeField] private float maxZoom = 8f;
-        [SerializeField] private float mouseSensitivity = 200f;
+        [SerializeField] private float maxZoom = 10f;
+        [SerializeField] private float mouseSensitivity = 150f;
 
         private float zoomDistance;
         private CinemachineFreeLook.Orbit[] originalOrbits;

@@ -128,8 +128,9 @@ namespace MMO.UI
                 new Vector2(0.5f, 0f),
                 new Vector2(0.5f, 0f),
                 new Vector2(0.5f, 0f),
-                Vector2.zero,
-                new Vector2(800f, 100f));
+                new Vector2(0f, 40f),
+                new Vector2(800f, 75f)
+            );
         }
 
         private static void CreatePlayerFrame(Transform parent)
@@ -137,11 +138,13 @@ namespace MMO.UI
             RectTransform rt = CreatePanel(
                 "PlayerFrame",
                 parent,
-                new Vector2(0f, 0f),
-                new Vector2(0f, 0f),
-                new Vector2(0f, 0f),
-                new Vector2(0f, 260f),
-                new Vector2(300f, 80f));
+                new Vector2(0.5f, 0f),   // anchor bottom center
+                new Vector2(0.5f, 0f),
+                new Vector2(1f, 0f),     // pivot right
+                new Vector2(-200f, 250f), // move up and left
+                new Vector2(300f, 80f)
+
+            );
 
             AddNameAndHealthBar(rt, "PlayerName");
         }
@@ -151,11 +154,12 @@ namespace MMO.UI
             RectTransform rt = CreatePanel(
                 "TargetFrame",
                 parent,
-                new Vector2(1f, 0f),
-                new Vector2(1f, 0f),
-                new Vector2(1f, 0f),
-                new Vector2(0f, 260f),
-                new Vector2(300f, 80f));
+                new Vector2(0.5f, 0f),   // anchor bottom center
+                new Vector2(0.5f, 0f),
+                new Vector2(0f, 0f),     // pivot left
+                new Vector2(200f, 250f), // move up and right
+                new Vector2(300f, 80f)
+            );
 
             AddNameAndHealthBar(rt, "TargetName");
         }
