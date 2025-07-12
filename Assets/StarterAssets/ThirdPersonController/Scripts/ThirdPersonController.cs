@@ -25,6 +25,9 @@ namespace StarterAssets
         [Range(0.0f, 0.3f)]
         public float RotationSmoothTime = 0.12f;
 
+        [Tooltip("Turn speed of the character in degrees per second")]
+        public float TurnSpeed = 150f;
+
         [Tooltip("Acceleration and deceleration")]
         public float SpeedChangeRate = 10.0f;
 
@@ -255,8 +258,13 @@ namespace StarterAssets
             Vector3 inputDirection = new Vector3(0.0f, 0.0f, forwardMove.y).normalized;
             Vector3 worldDirection = Quaternion.Euler(0.0f, _mainCamera.transform.eulerAngles.y, 0.0f) * inputDirection;
 
-            // rotate to face movement direction only when moving forward
-            if (forwardMove.y > Mathf.Epsilon)
+            // turn character using horizontal input
+            if (Mathf.Abs(_input.move.x) > _threshold)
+            {
+                transform.Rotate(0.0f, _input.move.x * TurnSpeed * Time.deltaTime, 0.0f);
+            }
+            // rotate to face movement direction only when moving forward and not turning
+            else if (forwardMove.y > Mathf.Epsilon)
             {
                 _targetRotation = Mathf.Atan2(worldDirection.x, worldDirection.z) * Mathf.Rad2Deg;
                 float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
