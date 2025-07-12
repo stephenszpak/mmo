@@ -216,17 +216,20 @@ namespace StarterAssets
             // set target speed based on move speed, sprint speed and if sprint is pressed
             float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
 
+            // ignore lateral input for a classic MMO feel
+            Vector2 forwardMove = new Vector2(0f, _input.move.y);
+
             // a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
 
             // note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
             // if there is no input, set the target speed to 0
-            if (_input.move == Vector2.zero) targetSpeed = 0.0f;
+            if (forwardMove == Vector2.zero) targetSpeed = 0.0f;
 
             // a reference to the players current horizontal velocity
             float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
 
             float speedOffset = 0.1f;
-            float inputMagnitude = _input.analogMovement ? _input.move.magnitude : 1f;
+            float inputMagnitude = _input.analogMovement ? forwardMove.magnitude : 1f;
 
             // accelerate or decelerate to target speed
             if (currentHorizontalSpeed < targetSpeed - speedOffset ||
@@ -248,12 +251,12 @@ namespace StarterAssets
             _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
             if (_animationBlend < 0.01f) _animationBlend = 0f;
 
-            // convert input direction relative to camera
-            Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
+            // convert input direction relative to camera (no strafing)
+            Vector3 inputDirection = new Vector3(0.0f, 0.0f, forwardMove.y).normalized;
             Vector3 worldDirection = Quaternion.Euler(0.0f, _mainCamera.transform.eulerAngles.y, 0.0f) * inputDirection;
 
             // rotate to face movement direction only when moving forward
-            if (_input.move.y > Mathf.Epsilon)
+            if (forwardMove.y > Mathf.Epsilon)
             {
                 _targetRotation = Mathf.Atan2(worldDirection.x, worldDirection.z) * Mathf.Rad2Deg;
                 float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
